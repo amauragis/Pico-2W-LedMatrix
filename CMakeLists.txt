@@ -4,26 +4,23 @@ cmake_minimum_required(VERSION 3.13)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 17)
 
-# initalize pico_sdk from installed location
-# (note this can come from environment, CMake cache etc)
 set(PICO_SDK_PATH "${CMAKE_SOURCE_DIR}/vendor/pico-sdk")
-# set(FREERTOS_KERNEL_PATH "${CMAKE_SOURCE_DIR}../../FreeRTOS-Kernel-SMP")
 set(FREERTOS_KERNEL_PATH "${CMAKE_SOURCE_DIR}/vendor/rpi-freertos-kernel")
 
 set(PICO_BOARD "pico2_w")
 set(PICO_PLATFORM "rp2350")
 
 # Pull in Raspberry Pi Pico SDK (must be before project)
-include(${PICO_SDK_PATH}/pico_sdk_init.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/cmake/pico_sdk_import.cmake)
 
 project(pico-2w-ledmatrix LANGUAGES C CXX ASM)
 
 
 # Pull in FreeRTOS
 include("${CMAKE_CURRENT_LIST_DIR}/freertos_config/freertos_config.cmake")
-include("${CMAKE_CURRENT_LIST_DIR}/FreeRTOS_Kernel_import.cmake")
+include("${CMAKE_CURRENT_LIST_DIR}/cmake/FreeRTOS_Kernel_import.cmake")
 
-# set(FREERTOS_PORT "GCC_ARM_CM33_NTZ_NONSECURE" CACHE STRING "" FORCE)
+set(FREERTOS_PORT "GCC_ARM_CM33_NTZ_NONSECURE" CACHE STRING "" FORCE)
 # add_subdirectory(${FREERTOS_KERNEL_PATH})
 
 
@@ -32,17 +29,8 @@ include("${CMAKE_CURRENT_LIST_DIR}/FreeRTOS_Kernel_import.cmake")
 # Initialise the Raspberry Pi Pico SDK
 pico_sdk_init()
 
-add_executable(hello_world
-    hello_world.c
-)
-
-# Add pico_stdlib library which aggregates commonly used features
-target_link_libraries(hello_world pico_stdlib freertos_config)
-
-# create map/bin/hex/uf2 file in addition to ELF.
-pico_add_extra_outputs(hello_world)
-
-# Add executable. Default name is the project name, version 0.1
+add_subdirectory(src/hello_world)
+add_subdirectory(src/freertos_blinky)
 
 # add_executable(pico-2w-ledmatrix
 # 	RP2040matrixDemo.c
