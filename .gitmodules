@@ -2,3 +2,6 @@
 	path = vendor/pico-sdk
 	url = git@github.com:raspberrypi/pico-sdk.git
 	shallow = true
+[submodule "vendor/rpi-freertos-kernel"]
+	path = vendor/rpi-freertos-kernel
+	url = git@github.com:raspberrypi/FreeRTOS-Kernel.git

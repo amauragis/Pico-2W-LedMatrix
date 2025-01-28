@@ -38,3 +38,6 @@ cmake-build-release/
 venv/
 
 images/*.xcf
+
+CMakeCache.txt
+CMakeFiles/
