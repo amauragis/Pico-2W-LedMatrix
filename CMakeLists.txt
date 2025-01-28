@@ -20,30 +20,12 @@ project(pico-2w-ledmatrix LANGUAGES C CXX ASM)
 
 
 # Pull in FreeRTOS
-add_library(freertos_config INTERFACE)
+include("${CMAKE_CURRENT_LIST_DIR}/freertos_config/freertos_config.cmake")
+include("${CMAKE_CURRENT_LIST_DIR}/FreeRTOS_Kernel_import.cmake")
 
-target_include_directories(freertos_config SYSTEM
-INTERFACE
-    freertos_config
-)
+# set(FREERTOS_PORT "GCC_ARM_CM33_NTZ_NONSECURE" CACHE STRING "" FORCE)
+# add_subdirectory(${FREERTOS_KERNEL_PATH})
 
-target_compile_definitions(freertos_config
-  INTERFACE
-    projCOVERAGE_TEST=0
-)
-
-target_compile_definitions(freertos_config INTERFACE ${definitions})
-target_compile_options(freertos_config INTERFACE ${options})
-
-set( FREERTOS_HEAP "4" CACHE STRING "" FORCE)
-# Select the native compile PORT
-set( FREERTOS_PORT "GCC_POSIX" CACHE STRING "" FORCE)
-# Select the cross-compile PORT
-if (CMAKE_CROSSCOMPILING)
-  set(FREERTOS_PORT "GCC_ARM_CA9" CACHE STRING "" FORCE)
-endif()
-
-add_subdirectory(${FREERTOS_KERNEL_PATH})
 
 
 
@@ -55,7 +37,7 @@ add_executable(hello_world
 )
 
 # Add pico_stdlib library which aggregates commonly used features
-target_link_libraries(hello_world pico_stdlib)
+target_link_libraries(hello_world pico_stdlib freertos_config)
 
 # create map/bin/hex/uf2 file in addition to ELF.
 pico_add_extra_outputs(hello_world)
