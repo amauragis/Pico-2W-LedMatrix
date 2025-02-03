@@ -77,5 +77,5 @@ void BlinkWAgent::run()
  */
 configSTACK_DEPTH_TYPE BlinkWAgent::getMaxStackSize()
 {
-    return 150;
+    return 200;
 }
