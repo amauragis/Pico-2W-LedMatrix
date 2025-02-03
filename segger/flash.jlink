@@ -1,0 +1,8 @@
+/* JLink Command file to flash the rp2350 */
+
+si 1
+speed 4000
+tif s
+loadfile "build/pico-2w-ledmatrix.hex"
+go
+exit

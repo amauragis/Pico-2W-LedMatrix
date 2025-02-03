@@ -1,5 +1,11 @@
 {
     "files.associations": {
+        "*.ejs": "html",
+        "CMake*.txt": "cmake",
+        "*.txt": "plaintext",
+        "*.html": "html",
+        ".clang-tidy": "plaintext",
+        "*.hujson": "jsonc",
         "hub75.pio.h": "c",
         "mountains_128x64_rgb565.h": "c",
         "hub75.h": "c",
@@ -23,18 +29,12 @@
         "queue.h": "c",
         "semphr.h": "c",
         "pico.h": "c",
-        "string.h": "c"
+        "string.h": "c",
     },
     "python.linting.enabled": true,
-    "python.analysis.typeshedPaths": [
-        ".vscode\\Pico-Stub"
-    ],
+
     "python.languageServer": "Pylance",
     "python.analysis.typeCheckingMode": "basic",
-    "python.analysis.extraPaths": [
-        ".vscode\\Pico-Stub\\stubs"
-    ]
-    ,
     // These settings tweaks to the cmake plugin will ensure
     // that you debug using cortex-debug instead of trying to launch
     // a Pico binary on the host
@@ -54,6 +54,5 @@
     },
     "cmake.buildBeforeRun": true,
     "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
-    "cortex-debug.openocdPath": "D:/_DevTools/openocd-0.11.0-3/bin/openocd_rp2040.exe",
-    "cortex-debug.variableUseNaturalFormat": false
+    "cortex-debug.variableUseNaturalFormat": false,
 }
