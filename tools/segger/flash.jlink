@@ -3,6 +3,6 @@
 si 1
 speed 4000
 tif s
-loadfile "build/pico-2w-ledmatrix.hex"
+loadfile "../build/pico-2w-ledmatrix.hex"
 go
 exit
