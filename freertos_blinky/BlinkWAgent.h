@@ -9,8 +9,8 @@
 
 #include "Agent.h"
 
-
-class BlinkWAgent: public Agent {
+class BlinkWAgent : public Agent
+{
 public:
 	/***
 	 * Constructor
@@ -23,22 +23,17 @@ public:
 	 */
 	virtual ~BlinkWAgent();
 
-
 protected:
-
 	/***
 	 * Run loop for the agent.
 	 */
 	virtual void run();
-
 
 	/***
 	 * Get the static depth required in words
 	 * @return - words
 	 */
 	virtual configSTACK_DEPTH_TYPE getMaxStackSize();
-
 };
-
 
 #endif /* BLINKAGENT_H_ */

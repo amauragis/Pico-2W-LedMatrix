@@ -3,6 +3,8 @@
 
 #include "BlinkWAgent.h"
 
+#include "pico/cyw43_arch.h"
+
 //Standard Task priority
 #define TASK_PRIORITY		( tskIDLE_PRIORITY + 1UL )
 
@@ -65,10 +67,12 @@ void runTimeStats(   ){
  * @param params - unused
  */
 void mainTask(void *params){
-	BlinkWAgent blink;
 
+	cyw43_arch_init();
+
+	BlinkWAgent blink;
 	printf("Boot task started\n");
-	blink.start("Blink", TASK_PRIORITY);
+	blink.start("Blink", TASK_PRIORITY+1);
 
 	for (;;){
 		vTaskDelay(2000);
@@ -84,7 +88,7 @@ void vLaunch( void) {
 
 	//Start blink task
     TaskHandle_t task;
-    xTaskCreate(mainTask, "MainThread", 500, NULL, TASK_PRIORITY, &task);
+    xTaskCreate(mainTask, "MainThread", 1000, NULL, TASK_PRIORITY, &task);
 
     /* Start the tasks and timer running. */
     vTaskStartScheduler();
@@ -99,6 +103,9 @@ int main(){
 	stdio_init_all();
 	sleep_ms(1000);
 
+	printf("Starting cyw43_arch_init\n");
+
+	sleep_ms(1000);
 	printf("Go\n");
 
     //Start tasks and scheduler

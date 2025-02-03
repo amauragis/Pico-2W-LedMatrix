@@ -6,13 +6,18 @@ add_executable(${NAME}
     BlinkWAgent.cpp
 )
 
+# add_compile_definitions(PICO_STDIO_STACK_BUFFER_SIZE=512)
 # Add pico_stdlib library which aggregates commonly used features
 target_link_libraries(${NAME} pico_stdlib )
 target_link_libraries(${NAME} freertos_config FreeRTOS-Kernel-Heap4 pico_cyw43_arch_none)
 
+target_compile_definitions(${NAME} PRIVATE
+    PICO_DEFAULT_UART_TX_PIN=16
+    PICO_DEFAULT_UART_RX_PIN=17
+)
 
 pico_enable_stdio_usb(${NAME} 1)
-pico_enable_stdio_uart(${NAME} 0)
+pico_enable_stdio_uart(${NAME} 1)
 
 # create map/bin/hex/uf2 file in addition to ELF.
 pico_add_extra_outputs(${NAME})

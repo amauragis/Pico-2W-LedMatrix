@@ -8,7 +8,7 @@ set(PICO_SDK_PATH "${CMAKE_SOURCE_DIR}/vendor/pico-sdk")
 set(FREERTOS_KERNEL_PATH "${CMAKE_SOURCE_DIR}/vendor/rpi-freertos-kernel")
 
 set(PICO_BOARD "pico2_w")
-set(PICO_PLATFORM "rp2350")
+set(PICO_PLATFORM "rp2350-arm-s")
 
 # Pull in Raspberry Pi Pico SDK (must be before project)
 include(${CMAKE_CURRENT_LIST_DIR}/cmake/pico_sdk_import.cmake)
@@ -24,7 +24,7 @@ set(FREERTOS_PORT "GCC_ARM_CM33_NTZ_NONSECURE" CACHE STRING "" FORCE)
 # add_subdirectory(${FREERTOS_KERNEL_PATH})
 
 
-
+# add_compile_definitions(PICO_STDIO_STACK_BUFFER_SIZE=256)
 
 # Initialise the Raspberry Pi Pico SDK
 pico_sdk_init()
